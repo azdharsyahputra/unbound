@@ -1,6 +1,6 @@
 # 🌀 Unbound — A Modern Social Platform
 
-> Built collaboratively by [Muhammad Azdhar Syahputra (Ajar)](https://github.com/azdharsyahputra) and [Panji Gunawan](https://github.com/gundz204), **Unbound** is a fully modular, event-driven social media platform built with a modern polyglot microservice architecture.  
+> Built collaboratively by [Muhammad Azdhar Syahputra](https://github.com/azdharsyahputra) and [Panji Gunawan](https://github.com/gundz204), **Unbound** is a fully modular, event-driven social media platform built with a modern polyglot microservice architecture.  
 >
 > The goal: create a scalable, intelligent, and developer-friendly social platform — powered by Go, Rust, Python, React, and gRPC.
 
@@ -173,7 +173,7 @@ This will:
 
 | Name | Role | GitHub |
 |:------|:------|:-------|
-| **Muhammad Azdhar Syahputra (Ajar)** | Backend Systems & Architecture | [@azdharsyahputra](https://github.com/azdharsyahputra) |
+| **Muhammad Azdhar Syahputra** | Backend Systems & Architecture | [@azdharsyahputra](https://github.com/azdharsyahputra) |
 | **Panji Gunawan** | Backend Systems & Architecture | [@gundz204](https://github.com/gundz204) |
 | **(TBD)** | Frontend Engineering & Product Design | — |
 
