@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "services/post",
+    "services/feed",
+    "services/graph"
+]
+resolver = "3"
