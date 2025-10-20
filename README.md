@@ -1,138 +1,116 @@
-# 🌐 Unbound — The Social for the Unrestricted Mind
+# 🌀 Unbound — A Modern Social Platform
 
-**Unbound** is a next-generation social media platform built for *authentic expression, freedom, and connection without boundaries.*  
-Still in early development stage — our mission is to create a space where creativity and individuality thrive without algorithmic noise.
-
----
-
-## 🚧 Current Status
-> **Phase:** Early Development (Pre-Alpha)  
-> **Goal:** Core microservices setup + basic frontend integration  
-> **Stack:** React • Go • Rust • Python (ML/FYP) • gRPC • Kafka
+> Built collaboratively by [Ajar (Muhammad Azdhar Syahputra)](https://github.com/azdharsyahputra) and [Co-Creator](), **Unbound** is a fully modular, event-driven social media platform built with a modern polyglot microservice architecture.  
+>
+> The goal: create a scalable, intelligent, and developer-friendly social platform — powered by Go, Rust, Python, React, and gRPC.
 
 ---
 
-## 🧱 Architecture Overview
+## 🚀 Tech Stack Overview
 
-Unbound is built using a **microservice architecture** with gRPC and Kafka as the backbone for communication and event streaming.
+| Layer | Stack | Description |
+|:------|:------|:------------|
+| **Frontend** | React + Vite + TypeScript + shadcn/ui | Web client with a clean, modern component library |
+| **Gateway / BFF** | Go (Fiber / Chi + gRPC Client) | Main API entry point connecting frontend to backend services |
+| **Microservices** | Go + Rust (tonic, sqlx) | Core logic (Auth, User, Post, Feed, Graph, Notification, Search) |
+| **Machine Learning** | Python (LightGBM / ONNX Runtime) | Handles FYP (For-You-Page) ranking and recommendations |
+| **Event Bus** | Kafka | Asynchronous event propagation between services |
+| **Datastores** | PostgreSQL + Redis + MinIO + ClickHouse | Core DB, caching, media storage, analytics |
+| **Infrastructure** | Docker Compose → Kubernetes (Helm / ArgoCD) | Local development and production deployment |
+| **Observability** | Prometheus + Grafana + Jaeger | Metrics, monitoring, and tracing |
+
+---
+
+## 🧩 Project Structure
 
 ```
-Frontend (React)
-       ↓
-API Gateway (Go)
-       ↓
-+-----------------------------+
-|  Auth Service (Rust)        |
-|  Feed Service (Go)          |
-|  User Service (Rust/Go)     |
-|  ML Recommender (Python)    |
-|  Notification Service (Go)  |
-+-----------------------------+
-       ↓
-Kafka Bus ↔ gRPC ↔ SQL/NoSQL DB
+unbound/
+├── web/               # React frontend (Vite + shadcn/ui)
+├── gateway/           # Go API Gateway / BFF
+├── services/          # Core microservices
+│   ├── auth/          # Authentication & token management (Go)
+│   ├── user/          # User profiles & relationships (Go)
+│   ├── post/          # Posting, likes, comments (Rust)
+│   ├── feed/          # Timeline & ranking logic (Rust)
+│   ├── graph/         # Social graph & recommendations (Rust)
+│   ├── notif/         # Notifications (Go)
+│   └── search/        # Search indexing (Go)
+├── ml/                # Python ML workers (FYP / Ranking)
+├── proto/             # gRPC schema definitions (shared contracts)
+├── infra/             # Docker, K8s manifests, monitoring setup
+├── scripts/           # Build & deployment helper scripts
+├── .env.example       # Default environment variables
+├── docker-compose.yml # Local dev orchestration
+└── README.md
 ```
 
-**Highlights:**
-- 🧩 **Modular Services** — scalable and language-agnostic.  
-- ⚡ **gRPC** — fast binary communication between services.  
-- 🧠 **Machine Learning (Python)** — personalized FYP system.  
-- 🕸️ **Kafka Streams** — event-driven feed updates and analytics.  
-
 ---
 
-## 🧠 Core Ideas
-- **Freedom First:** No forced algorithm. Chronological and discovery feeds coexist.  
-- **Authentic Voice:** Multi-persona system (public, private, anonymous).  
-- **Decentralization Ready:** Designed with Web3-compatible architecture in mind.  
-- **Own Your Data:** User content portability and privacy control.
+## ⚙️ Local Development Setup
 
----
+### 1. Clone the Repository
 
-## 🧩 Tech Stack
-
-| Layer | Technology |
-|-------|-------------|
-| **Frontend** | React + Tailwind + shadcn/ui |
-| **Backend (API)** | Go (Gin / Fiber) |
-| **Heavy Logic Services** | Rust (Axum / Actix) |
-| **ML / Recommendation** | Python (FastAPI + TensorFlow / PyTorch) |
-| **Communication** | gRPC + Kafka |
-| **Database** | PostgreSQL / MongoDB (still evaluating) |
-| **Auth** | JWT + OAuth2 |
-
----
-
-## 📦 Current Repositories
-
-| Service | Language | Status |
-|----------|-----------|---------|
-| `unbound-frontend` | React | 🚧 In Progress |
-| `unbound-auth` | Rust | 🧱 Setup Phase |
-| `unbound-feed` | Go | 🧩 Designing schema |
-| `unbound-ml` | Python | 🧠 Research stage |
-| `unbound-notify` | Go | ⏳ Planned |
-
----
-
-## 🧰 Development Setup
-
-### Prerequisites
-- Node.js 20+
-- Go 1.22+
-- Rust (latest stable)
-- Python 3.11+
-- Kafka + Zookeeper (Docker)
-- PostgreSQL or MongoDB
-
-### Setup (local dev)
 ```bash
-# Clone repo
 git clone https://github.com/azdharsyahputra/unbound.git
 cd unbound
-
-# Run frontend
-cd unbound-frontend
-npm install && npm run dev
-
-# Run backend service
-cd ../unbound-feed
-go run main.go
 ```
 
----
+### 2. Copy Environment Variables
 
-## 🧪 Planned Milestones
+```bash
+cp .env.example .env
+```
 
-| Phase | Description | ETA |
-|--------|--------------|------|
-| **Phase 1** | Core service scaffolding, gRPC + Kafka integration | Nov 2025 |
-| **Phase 2** | FYP ML model prototype + auth integration | Dec 2025 |
-| **Phase 3** | Frontend + feed UI integration | Jan 2026 |
-| **Phase 4** | Closed Alpha release | Q1 2026 |
+Fill in your `.env` file with your local settings:
 
----
+```env
+POSTGRES_URL=postgres://unbound:password@localhost:5432/unbound
+REDIS_URL=redis://localhost:6379
+KAFKA_BROKER=localhost:9092
+MINIO_URL=http://localhost:9000
+JWT_SECRET=supersecret
+```
 
-## 🧑‍💻 Contributors
-| Name | Role |
-|------|------|
-| **Ajar (Muhammad Azdhar Syahputra)** | Founder / Full-Stack Engineer |
-| **(TBD)** | Co-developer / Backend Support |
+### 3. Run Local Services (Docker Compose)
 
----
+```bash
+docker-compose up --build
+```
 
-## 💬 Vision Statement
-> “Unbound isn’t just another social app — it’s a rebellion against constraint.  
-> A place where expression flows freely, and your voice isn’t lost in the noise.”
-
----
-
-## 🪪 License
-MIT License © 2025 Muhammad Azdhar Syahputra  
-Feel free to fork, learn, and contribute.
+This will:
+- Start PostgreSQL, Redis, Kafka, and MinIO  
+- Build all Go/Rust services  
+- Run the Python ML worker in the background  
+- Serve the web client at [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🧭 Links
-- 🌍 [Website (coming soon)](https://unbound.social)
-- 📘 [Docs (TBA)](https://docs.unbound.social)
-- 🧠 [Design Notes / Figma (TBA)](https://figma.com/unbound)
+## 🧠 Development Philosophy
+
+- 🧩 **Microservice-first:** Each module scales independently and communicates via gRPC or Kafka.  
+- ⚡ **gRPC over REST:** All inter-service communication uses gRPC for high performance and strict contracts.  
+- 📨 **Event-driven backbone:** Kafka connects services asynchronously (`post.created`, `follow.created`, etc).  
+- 🧠 **ML-powered feeds:** Python ML workers continuously train ranking models (LightGBM → ONNX).  
+- 🎨 **Modern frontend:** React + shadcn/ui for an elegant, responsive interface.  
+
+---
+
+## 🤝 Creators
+
+| Name | Role | GitHub |
+|:------|:------|:-------|
+| **Muhammad Azdhar Syahputra** | Backend Systems & Architecture | [@azdharsyahputra](https://github.com/azdharsyahputra) |
+| **[Co-Creator Name]** | Frontend / ML Engineering | *(add your partner’s GitHub link here)* |
+
+> Built collaboratively with equal roles — no lead, no hierarchy.  
+> Every commit is a shared step toward something unbound. 🌌
+
+---
+
+## 🪄 License
+
+**MIT License** © 2025 [Ajar & Co-Creator](https://github.com/azdharsyahputra)
+
+---
+
+> _"Build clean. Build fast. Stay unbound."_ — 2025
